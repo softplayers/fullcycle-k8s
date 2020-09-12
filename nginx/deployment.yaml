@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fullcycle-k8s-nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fullcycle-k8s-nginx
+  template:
+    metadata:
+      labels: 
+        app: fullcycle-k8s-nginx
+    spec:
+      containers:
+        - name: fullcycle-k8s-nginx
+          image: softplayers/fullcycle-k8s-nginx
+          ports:
+            - containerPort: 80
