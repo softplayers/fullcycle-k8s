@@ -8,6 +8,6 @@ steps:
 
 - id: 'Build image'
   name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/fullcycle-k8s-go', '.']
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/fullcycle-k8s-go', './go']
 
 images: ['gcr.io/$PROJECT_ID/fullcycle-k8s-go']
