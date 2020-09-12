@@ -2,11 +2,11 @@ steps:
 
 - id: 'Exec unit tests'
   name: 'golang:alpine'
-  args: ['go', 'test']
+  args: ['go', './go/test']
 
 - id: 'Build project'
   name: 'go'
-  args: ['go', 'build', 'app.go']
+  args: ['go', 'build', './go/app.go']
 
 - id: 'Build image'
   name: 'gcr.io/cloud-builders/docker'
