@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: fullcycle-k8s-go-service
 spec:
+  type: LoadBalancer
   ports:
     - port: 8000
   selector:
