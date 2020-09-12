@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fullcycle-k8s-go-deployment
+spec:
+  replicas: 1
+
+  selector: # usado pelo service
+    matchLabels:
+      app: fullcycle-k8s-go-server
+      tier: db
+  
+  template:
+    metadata:
+      labels: 
+        app: fullcycle-k8s-go-server
+        tier: db
+    spec:
+      containers:
+        - image: mysql:5.7
+          name: mysql-server
+          args:
+            - "--ignore-db-dir=lost+found"
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fullcycle-k8s-mysql-secret
+                  key: password
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: fullcycle-k8s-mysql-persistent-storage
+              mountPath: /var/lib/mysql
+
+      volumes:
+        - name: fullcycle-k8s-mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: fullcycle-k8s-mysql-volume-claim
+

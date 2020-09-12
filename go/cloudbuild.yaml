@@ -1,0 +1,15 @@
+steps:
+
+- id: 'Exec unit tests'
+  name: 'golang:alpine'
+  args: ['test']
+
+- id: 'Build project'
+  name: 'go'
+  args: ['build', 'app.go']
+
+- id: 'Build image'
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/fullcycle-k8s-go', '.']
+
+images: ['gcr.io/$PROJECT_ID/fullcycle-k8s-go']
